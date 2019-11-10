@@ -1,0 +1,31 @@
+body {
+    width: 33%;
+}
+
+.resDisplay {
+    background-color: lightgray;
+    border: solid;
+    height: 48px;
+    font-size: 20px;
+}
+
+.button {
+    width: 25%;
+    height: 36px;
+    font-size: 18px;
+    margin: 0px;
+    float: left;
+}
+
+.digit {
+    background-color: lightgreen;
+    color: brown;
+}
+.result {
+    background-color: darkgreen;
+    color: white;
+}
+.operator {
+    background-color: black;
+    color: red;
+}
