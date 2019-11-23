@@ -26,7 +26,7 @@ class Difference {
 
         maximumDifference = max;
     }
-} // End of Difference Class
+} //End of Difference Class
 
 class Solution {
     static void Main(string[] args) {
