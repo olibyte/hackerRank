@@ -15,7 +15,7 @@ using System;
 class Solution
 {
 
-    // Complete the factorial function below.
+    //Complete the factorial function below.
     static int factorial(int n)
     {
         if (n == 0)
