@@ -14,7 +14,6 @@ using System;
 
 class Solution
 {
-
     //Complete the factorial function below.
     static int factorial(int n)
     {
