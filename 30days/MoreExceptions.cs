@@ -1,7 +1,13 @@
 using System;
 
-//Write your code here
-
+class Calculator {
+    int power(int n, int p) 
+    {
+		if (p < 0 || n < 0)
+			throw new Exception("n and p should be non-negative");
+		return (int) Math.Pow(n, p);
+	}
+}
 class Solution{
     static void Main(String[] args){
         Calculator myCalculator=new  Calculator();
