@@ -29,7 +29,7 @@ class Solution
                 }
             }
 
-            // If no elements were swapped during a traversal, array is sorted
+            //If no elements were swapped during a traversal, array is sorted
             if (numberOfSwaps == 0)
             {
                 break;
