@@ -16,6 +16,7 @@ class Solution {
 
     // Complete the sockMerchant function below.
     static int sockMerchant(int n, int[] ar) {
+            //group the socks into matching pairs, then calculate the number of pairs (sum of socks in all groups / 2)
             return ar.GroupBy(a => a).Sum(a => a.Count() / 2); //LINQ
     }
 
