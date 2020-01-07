@@ -14,7 +14,6 @@ using System;
 
 class Solution
 {
-
     // Complete the migratoryBirds function below.
     static int migratoryBirds(List<int> arr)
     {
