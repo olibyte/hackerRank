@@ -16,15 +16,15 @@ class Solution {
 
     // Complete the utopianTree function below.
     static int utopianTree(int n) {
-        if(n == 0)
+        if(n == 0) //season begins with summer
         {
             return 1;
         }
-        else if(n % 2 == 1)
+        else if(n % 2 == 1) //monsoon season
         {
             return 2 * (utopianTree(n-1));
         }
-        else
+        else //summer
         {
             return 1 + (utopianTree(n-1));
         }
