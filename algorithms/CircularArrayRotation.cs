@@ -33,15 +33,12 @@ class Solution
 
         a = temp;
 
-
-
         int[] result = new int[queries.Length];
         for (int i = 0; i < queries.Length; i++)
         {
             result[i] = a[queries[i]];
         }
-
-
+        
         return result;
 
     }
