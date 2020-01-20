@@ -19,11 +19,13 @@ class Solution
     static int squares(int a, int b)
     {
         int total = 0;
-
+        //for all ints between a and b
         for (int i = a; i <= b; i++)
         {
+            //if the root of i == root of i cast to an int
             if (Math.Sqrt(i) == (int)Math.Sqrt(i))
             {
+                //increment the total and double the root of i
                 total++;
                 i += (int)Math.Sqrt(i) * 2;
             }
