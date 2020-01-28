@@ -16,13 +16,15 @@ class Solution {
 
     // Complete the minimumAbsoluteDifference function below.
     static int minimumAbsoluteDifference(int[] arr) {
-        Array.Sort(arr);
+        Array.Sort(arr); //sort the arr to ensure a[i] <= a[i+1]
 
-        var min = Math.Abs(arr[0] - arr[1]);
+        //var min = Math.Abs(arr[0] - arr[1]);
+        var min = arr[1] - arr[0]; //initialise variable to store min dif
 
         for(int i = 1; i < arr.Length-1; i++)
         {
-            var abs = Math.Abs(arr[i] - arr[i+1]);
+            //var abs = Math.Abs(arr[i] - arr[i+1]);
+            var abs = arr[i+1] - arr[i]; //because arr is sorted, we no longer need to call Math.abs
 
             if (abs < min)
             {
