@@ -20,6 +20,14 @@ class Checker implements Comparator<Player> {
         }
         return result < 0 ? 1 : -1;
     }
+    // //simpler version
+    // public int compare(Player a, Player b) {
+    //     if(a.score == b.score)
+    //     {
+    //         return a.name.compareTo(b.name);
+    //     }
+    //     return b.score - a.score;
+    // }
 }
 
 
