@@ -21,9 +21,9 @@ class QueueWithTwoStacks<T>
     }
         
     private void prepOld() {
-         if (stackOldestOnTop.Count == 0) {
-            while(!(stackNewestOnTop.Count == 0)) {
-                stackOldestOnTop.Push(stackNewestOnTop.Pop());
+         if (stackOldestOnTop.Count == 0) {//if the queue is empty
+            while(!(stackNewestOnTop.Count == 0)) { //while the stack is not empty
+                stackOldestOnTop.Push(stackNewestOnTop.Pop()); //push the contents of the stack into the queue
             }
          }
     }
