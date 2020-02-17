@@ -15,7 +15,7 @@ using System;
 class Solution
 {
 
-    // Complete the arrayManipulation function below.
+    // Complete the arrayManipulation function below
     static long arrayManipulation(int n, int[][] queries)
     {
         long[] root = new long[n + 2];
