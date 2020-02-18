@@ -18,7 +18,7 @@ class Solution
     // Complete the countTriplets function below.
     static long countTriplets(List<long> arr, long r)
     {
-        Dictionary<long, long> count = new Dictionary<long, long>();
+        Dictionary<long, long> freq = new Dictionary<long, long>();
         Dictionary<long, long> twins = new Dictionary<long, long>();
         long result = 0;
         for (int i = 0; i < arr.Count; i++)
@@ -31,15 +31,15 @@ class Solution
                 {
                     result += twins[prev];
                 }
-                if (count.ContainsKey(prev))
+                if (freq.ContainsKey(prev))
                 {
                     if (twins.ContainsKey(element))
                     {
-                        twins[element] += count[prev];
+                        twins[element] += freq[prev];
                     }
                     else
                     {
-                        twins[element] = count[prev];
+                        twins[element] = freq[prev];
                     }
                 }
                 else
@@ -47,13 +47,13 @@ class Solution
                     twins[element] = 0;
                 }
             }
-            if (count.ContainsKey(element))
+            if (freq.ContainsKey(element))
             {
-                count[element]++;
+                freq[element]++;
             }
             else
             {
-                count[element] = 1;
+                freq[element] = 1;
             }
         }
         return result;
