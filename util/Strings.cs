@@ -210,6 +210,226 @@ using System.Windows.Shapes;
 				OutputTextBox.Text += $"Ticket Code: {searchString} is {result}\r\n";
 			}
 		}
+        //verify that string contains search characters
+        private void ButtonA_Click(object sender, RoutedEventArgs e) {
+			// #BFR--443!
+			string inputString = InputTextBox.Text;
+			string message = String.Empty;
+			// String supports three methods to determine if a substring exists
+			// Contains, StartsWith, EndsWith
+
+			bool hasStartString, hasEndString, containsString;
+
+			hasStartString = inputString.StartsWith("#");
+			hasEndString = inputString.EndsWith("!");
+			containsString = inputString.Contains("--");
+
+			message = $"Starts with (#) :{hasStartString}, Contains (--): {containsString}, Ends with (!): {hasEndString}";
+			OutputTextBox.Text = message;
+
+		}
+        //REMOVE SUBSTRING
+        private void ButtonA_Click(object sender, RoutedEventArgs e) {
+			// 0123456
+			// 01234--	Remove(2)
+			// ---3456  Remove(0,3)
+			// 01----6	Remove(2,4)
+
+			string sample = this.InputTextBox.Text;
+			string prefix = "https://";
+
+			if (sample.StartsWith(prefix))
+			{
+				OutputTextBox.Text = sample.Remove(0, prefix.Length);
+			}
+			else
+			{
+				OutputTextBox.Text = sample;
+			}
+		}
+        //REMOVE SUBSTRING CASE INSENSITIVE
+		private void ButtonB_Click(object sender, RoutedEventArgs e) {
+			string sample = this.InputTextBox.Text;
+			string prefix = "https://";
+
+			if (sample.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+			{
+				OutputTextBox.Text = sample.Remove(0, prefix.Length);
+			}
+			else
+			{
+				OutputTextBox.Text = sample;
+			}
+		}
+        //REPLACE
+		private void ButtonC_Click(object sender, RoutedEventArgs e) {
+			this.OutputTextBox.Text = string.Empty;
+			string sample = "aa-ss-ee-dd-we-ss-44-ss-11-ss-d-ddf-ers";
+			this.OutputTextBox.Text += sample + "\r\n";
+			string replacedString = sample.Replace("-",", ") ;
+			OutputTextBox.Text += replacedString + "\r\n";
+		}
+        //REPLACE MULTIPLE
+		private void ButtonD_Click(object sender, RoutedEventArgs e) {
+			string sample = "ace-bow-cow-dew @elf @fig @gum hue# icy# jam#";
+
+			this.OutputTextBox.Text += sample + "\r\n";
+			string replacedString = sample.Replace("-", ", ").Replace("@", ", ").Replace("#", ", ");
+			OutputTextBox.Text += replacedString + "\r\n";
+		}
+        //CODING CHALLENGE BETTER SUBSTRING
+        private void ButtonA_Click(object sender, RoutedEventArgs e) {
+			// code challenge #1
+			// write a method that takes a start word and end word and returns
+			// the substring contained between those words.
+
+			// code challenge #2
+			// write another method that takes a start word and end word and replacement string
+			// and returns a string containing the substitute text.
+
+			string sample = "At Roux Academy, our mission is to teach and inspire the next generation’s artists...";
+			string startWord = "our";
+			string endWord = "the ";
+			OutputTextBox.Text += sample + "\r\n";
+
+			string result = string.Empty;
+
+			result = sample.Substring(20, 33);
+			result = GetSubStringBetweenWords(sample, startWord, endWord);
+			OutputTextBox.Text += result + "\r\n";
+			result = ReplaceBetweenWords(sample, startWord, endWord, " quest is to inspire and mentor ");
+
+			OutputTextBox.Text += result + "\r\n";
+		}
+
+		#region "Code Challenge solution"
+
+		public string GetSubStringBetweenWords(string candidate, string firstWord, string lastWord) {
+			string result = string.Empty;
+			int firstSnipPointIndex, lastSnipPointIndex;
+
+			if (DoesFirstAndLastWordExist(candidate, firstWord, lastWord))
+			{
+				firstSnipPointIndex = candidate.IndexOf(value: firstWord, startIndex: 0) + firstWord.Length;
+				lastSnipPointIndex = candidate.IndexOf(value: lastWord, startIndex: firstSnipPointIndex);
+				return candidate.Substring(startIndex: firstSnipPointIndex, length: lastSnipPointIndex - firstSnipPointIndex);
+			}
+			else
+			{
+				return string.Empty;
+			}
+
+		}
+		private bool DoesFirstAndLastWordExist(string candidate, string firstWord, string lastWord) {
+			return (candidate.Contains(firstWord) && candidate.Contains(lastWord));
+
+		}
+		public string ReplaceBetweenWords(string candidate, string firstWord, string lastWord, string replacementText) {
+			int firstSnipPointIndex, lastSnipPointIndex;
+
+			// "this is " "the new value " "in the string"
+
+			if (DoesFirstAndLastWordExist(candidate, firstWord, lastWord))
+			{
+				firstSnipPointIndex = candidate.IndexOf(value: firstWord, startIndex: 0) + firstWord.Length;
+				string firstSubstring = candidate.Substring(startIndex: 0, length: firstSnipPointIndex);
+
+				lastSnipPointIndex = candidate.IndexOf(value: lastWord, startIndex: firstSnipPointIndex);
+				
+				// use remove or substring to get the end part of the string!
+				string lastSubString = candidate.Remove(startIndex: 0, count: lastSnipPointIndex);
+				lastSubString = candidate.Substring(startIndex: lastSnipPointIndex, length: candidate.Length - lastSnipPointIndex);
+
+				return $"{firstSubstring}{replacementText}{lastSubString}"; ;
+			}
+			else
+			{
+				return string.Empty;
+			}
+		}
+
+
+//CUSTOM FORMATTER CLASS
+        using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ExampleApp {
+	public class RayPoint : Object, IFormattable {
+        //comma
+		public override string ToString() {
+			return ToString("C");
+		}
+        //format using user's culture
+		public string ToString(string format) {
+
+			var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+			return ToString(format, currentCulture);
+			
+		}
+
+        //format using differing separators
+		public string ToString(string format, IFormatProvider formatProvider)
+		{
+            //cast using 
+			var cultureInfo = formatProvider as System.Globalization.CultureInfo; 
+		
+			var separator = cultureInfo.TextInfo.ListSeparator;
+			var numSeparator = cultureInfo.NumberFormat.NumberDecimalSeparator;
+			string formattedString;
+			switch (format)
+			{
+				case "C":
+					formattedString = $"X: {X}{separator} Y:{Y}";
+					break;
+				case "H":
+					formattedString = $"X: {X} - Y:{Y}";
+					break;
+				case "F":
+					formattedString = $"X: {X} --++-- Y:{Y}";
+					break;
+				default:
+					formattedString = $"X: {X}{separator} Y:{Y}";
+					break;
+			}
+			return formattedString;
+		}
+
+		#region Constructors
+		public RayPoint() {
+
+		}
+
+		public RayPoint(int x, int y) {
+			_x = x;
+			_y = y;
+		}
+		#endregion
+		#region Properties
+
+
+		private int _x;
+
+		public int X
+		{
+			get { return _x; }
+			set { _x = value; }
+		}
+
+		private int _y;
+
+		public int Y
+		{
+			get { return _y; }
+			set { _y = value; }
+		}
+
+		#endregion
+	}
+}
+
         */
 
 private void doesCharExist(object sender, RoutedEventArgs e)
