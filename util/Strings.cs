@@ -472,3 +472,176 @@ private void isItADigit(object sender, TextCompositionEventArgs e)
         return true;
     }
 }
+
+/*TRY PARSE
+
+private List<string> _inputStrings = new List<string> { "123", "-45", "1,543", "(46)", "123.5", "", "hi" };
+
+		private void ButtonA_Click(object sender, RoutedEventArgs e) {
+
+			// The TryParse method is like the Parse method, 
+			// except the TryParse method does not throw an exception 
+			// if the conversion fails. 
+			// It eliminates the need to use exception handling to test for a FormatException
+
+			int intResult;
+
+			foreach (var input in _inputStrings)
+			{
+				if (Int32.TryParse(input, System.Globalization.NumberStyles.Any, null, out intResult))
+				{
+					OutputTextBox.Text += $"{input}: converted to {intResult}\r\n";
+				}
+				else
+
+				{
+					OutputTextBox.Text += $"Cannot parse {input}: to Int32\r\n";
+				}
+			}
+		}
+
+		private void ButtonB_Click(object sender, RoutedEventArgs e) {
+			double doubleResult;
+
+			foreach (var input in _inputStrings)
+			{
+				if (Double.TryParse(input, System.Globalization.NumberStyles.Any, null, out doubleResult))
+				{
+					OutputTextBox.Text += $"{input}: converted to {doubleResult}\r\n";
+				}
+				else
+
+				{
+					OutputTextBox.Text += $"Cannot parse {input}: to Double\r\n";
+				}
+			}
+		}
+
+		private void ButtonC_Click(object sender, RoutedEventArgs e) {
+			var _inputStrings = new List<string> { "5/5/1925", "4/5", "July 21, 2002", "46", "January", "4:32:10", "4-4-44" };
+			DateTime dateResult;
+			foreach (var input in _inputStrings)
+			{
+				if (DateTime.TryParse(input,  null, System.Globalization.DateTimeStyles.AllowInnerWhite, out dateResult))
+				{
+					OutputTextBox.Text += $"{input}: converted to {dateResult}\r\n";
+				}
+				else
+
+				{
+					OutputTextBox.Text += $"Cannot parse {input}: to DateTime\r\n";
+				}
+			}
+		} 
+        */
+
+        /*CULTURE INFO TRANSLATION
+        		private CultureInfo _ciUS = new CultureInfo("en-US");
+		private CultureInfo _ciDE = new CultureInfo("de-DE");
+		private CultureInfo _ciBN = new CultureInfo("bn-IN");
+		private CultureInfo _ciCN = new CultureInfo("zh-CN");
+
+
+		private void ButtonA_Click(object sender, RoutedEventArgs e) {
+			decimal amount = 36450.89M;
+			OutputTextBox1.Text += $"{_ciUS.EnglishName}:\t\t{amount.ToString("C", _ciUS)}\r\n";
+			OutputTextBox1.Text += $"{_ciDE.EnglishName}:\t\t{amount.ToString("C", _ciDE)}\r\n";
+			OutputTextBox1.Text += $"{_ciBN.EnglishName}:\t\t\t{amount.ToString("C", _ciBN)}\r\n";
+			OutputTextBox1.Text += $"{_ciCN.EnglishName}:\t\t{amount.ToString("C", _ciCN)}\r\n";
+		}
+
+		private void ButtonB_Click(object sender, RoutedEventArgs e) {
+			DateTime saleDate = DateTime.Parse("7/21/2002 13:15:58", _ciUS);
+
+			OutputTextBox2.Text += $"{_ciUS.EnglishName}:\t{saleDate.ToString("D", _ciUS)}\r\n";
+			OutputTextBox2.Text += $"{_ciDE.EnglishName}:\t{saleDate.ToString("D", _ciDE)}\r\n";
+			OutputTextBox2.Text += $"{_ciBN.EnglishName}:\t\t{saleDate.ToString("D", _ciBN)}\r\n";
+			OutputTextBox2.Text += $"{_ciCN.EnglishName}:\t{saleDate.ToString("D", _ciCN)}\r\n";
+
+			OutputTextBox2.Text += $"--------------\r\n";
+
+			OutputTextBox2.Text += $"{_ciUS.EnglishName}:\t{saleDate.ToString("d", _ciUS)}\r\n";
+			OutputTextBox2.Text += $"{_ciDE.EnglishName}:\t{saleDate.ToString("d", _ciDE)}\r\n";
+			OutputTextBox2.Text += $"{_ciBN.EnglishName}:\t\t{saleDate.ToString("d", _ciBN)}\r\n";
+			OutputTextBox2.Text += $"{_ciCN.EnglishName}:\t{saleDate.ToString("d", _ciCN)}\r\n";
+
+			OutputTextBox2.Text += $"--------------\r\n";
+			OutputTextBox2.Text += $"{_ciUS.EnglishName}:\t{saleDate.ToString("T", _ciUS)}\r\n";
+			OutputTextBox2.Text += $"{_ciDE.EnglishName}:\t{saleDate.ToString("T", _ciDE)}\r\n";
+			OutputTextBox2.Text += $"{_ciBN.EnglishName}:\t\t{saleDate.ToString("T", _ciBN)}\r\n";
+			OutputTextBox2.Text += $"{_ciCN.EnglishName}:\t{saleDate.ToString("T", _ciCN)}\r\n";
+		}
+        */
+
+        /*CULTURE INFO INVARIANT
+
+        		private CultureInfo _cultureUS = new CultureInfo("en-US");
+		private CultureInfo _cultureDE = new CultureInfo("de-DE");
+		private CultureInfo _cultureInvariant = new CultureInfo("");
+		private Decimal _saleAmountUS, _saleAmountDE;
+		private string _amountAsUsCurrency1, _amountAsDeCurrency1, _amountAsInvariantCurrency1;
+		private string _amountAsUsCurrency2, _amountAsDeCurrency2, _amountAsInvariantCurrency2;
+
+		private void ButtonA_Click(object sender, RoutedEventArgs e) {
+			try
+			{
+				ParseDataUS();
+				OutputTextBox1.Text += $"US:\t\t{_amountAsUsCurrency1}\r\n";
+				OutputTextBox1.Text += $"DE:\t\t{_amountAsDeCurrency1}\r\n";
+				OutputTextBox1.Text += $"Invariant:\t{_amountAsInvariantCurrency1}\r\n";
+			} catch (Exception)
+			{
+				throw;
+			}
+		}
+
+	
+
+		private void ButtonB_Click(object sender, RoutedEventArgs e) {
+			try
+			{
+				ParseDataDE();
+
+				OutputTextBox2.Text += $"US:\t\t{_amountAsUsCurrency2}\r\n";
+				OutputTextBox2.Text += $"DE:\t\t{_amountAsDeCurrency2}\r\n";
+				OutputTextBox2.Text += $"Invariant:\t{_amountAsInvariantCurrency2}\r\n";
+			} catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		private void ParseDataUS() {
+			_saleAmountUS = Decimal.Parse(InputTextBox.Text, NumberStyles.Any, _cultureUS);
+			_amountAsUsCurrency1 = _saleAmountUS.ToString("C", _cultureUS);
+			_amountAsDeCurrency1 = _saleAmountUS.ToString("C", _cultureDE);
+			_amountAsInvariantCurrency1 = _saleAmountUS.ToString("C", _cultureInvariant); ;
+		}
+
+		private void ParseDataDE() {
+			_saleAmountDE = Decimal.Parse(InputTextBoxDE.Text, NumberStyles.Any, _cultureDE);
+			_amountAsUsCurrency2 = _saleAmountDE.ToString("C", _cultureUS);
+			_amountAsDeCurrency2 = _saleAmountDE.ToString("C", _cultureDE);
+			_amountAsInvariantCurrency2 = _saleAmountDE.ToString("C", _cultureInvariant);
+		}
+
+		private void ButtonC_Click(object sender, RoutedEventArgs e) {
+			// use invariant versions for comparison where culture isn't important
+		
+			ParseDataUS();
+			ParseDataDE();
+			if (_amountAsInvariantCurrency1 == _amountAsInvariantCurrency2)
+			{
+				OutputTextBox3.Text += $"{_amountAsInvariantCurrency1} == {_amountAsInvariantCurrency2}\r\n";
+			}
+			else
+
+			{
+				OutputTextBox3.Text += $"{_amountAsInvariantCurrency1} != {_amountAsInvariantCurrency2}\r\n";
+			}
+		}
+		private void ButtonD_Click(object sender, RoutedEventArgs e) {
+			InputTextBox.Text = "4,615.44";
+			InputTextBoxDE.Text = "4.615,44";
+		}
+        */
