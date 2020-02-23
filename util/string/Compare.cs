@@ -54,10 +54,10 @@ namespace ExampleApp {
 			OutputToScreen($"Culture: (a) compared to (z) is {result}");
 			OutputToScreen("-----");
 			result = string.Compare("a", "z", StringComparison.Ordinal);
-			OutputToScreen($"Ordinal: (a) compared to (z) is {result}");
+			OutputToScreen($"Ordinal: (a) compared to (z) is {result}"); //-25
 
 			result = string.Compare("a", "r", StringComparison.Ordinal);
-			OutputToScreen($"Ordinal: (a) compared to (r) is {result}");
+			OutputToScreen($"Ordinal: (a) compared to (r) is {result}"); //-17
 
 			result = string.Compare(ss, ess);
 			OutputToScreen($"Culture: (ss) compared to (ß) is {result}");
