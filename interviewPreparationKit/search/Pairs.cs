@@ -38,6 +38,23 @@ class Solution
                 }
             }
         }
+        /* using Binary Search
+              static int pairs(int k, int[] arr) {
+        Array.Sort(arr);
+
+        var sum = 0;
+
+        for (var index = 0; index < arr.Length; index++)
+        {
+            var current = arr[index];
+            if (Array.BinarySearch(arr, current + k) > -1)
+                sum++;
+        }
+
+        return sum;
+    }
+
+        */
 
         return pairsCount;
     }
