@@ -16,7 +16,6 @@ namespace DoubleLinkedList
             }
             return true;
         }
-
         static void Main(string[] args)
         {
             DoublyLinkedList<int> list = null;
