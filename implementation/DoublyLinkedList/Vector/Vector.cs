@@ -247,5 +247,6 @@ namespace Vector
         {           
             Array.Sort(data, 0, Count, comparer);
         }
+        
     }
 }
