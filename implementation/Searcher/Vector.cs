@@ -155,7 +155,7 @@ namespace Vector
             return -1;
 
         }
-        public int BinarySearch(T element, int left, int right, IComparer<T> comparer)
+        private int BinarySearch(T element, int left, int right, IComparer<T> comparer)
         {
             if (comparer == null)
                 comparer = Comparer<T>.Default;
