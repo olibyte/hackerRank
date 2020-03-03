@@ -130,7 +130,6 @@ namespace Vector
             }
             return -1;
         }
-        // TODO: Your task is to implement all the remaining methods.
         public int BinarySearch_Iterative(T element, IComparer<T> comparer)
         {
             int bottom = 0;
