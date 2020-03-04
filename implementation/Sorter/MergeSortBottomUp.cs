@@ -8,44 +8,64 @@ namespace Vector
     {
         public void Sort<K>(K[] sequence, IComparer<K> comparer) where K : IComparable<K>
         {
-            if (comparer == null) comparer = Comparer<K>.Default;
-
             MergeSort(sequence, comparer);
         }
-        private static void MergeSort<K>(K[] sequence, IComparer<K> comparer) where K : IComparable<K>
+
+        private void MergeSort<K>(K[] sequence, IComparer<K> comparer) where K : IComparable<K>
         {
             int n = sequence.Length;
-            if (n < 2) return; //array is trivially sorted
+            K[] src = sequence;     //alias for original sequence
+            K[] dest = new K[n];    //new temporary array
 
-            //divide
-            int mid = n / 2;
-            K[] S1 = new K[mid];
-            K[] S2 = new K[mid];
-            S1 = sequence.Take(mid).ToArray();
-            S2 = sequence.Skip(mid).ToArray();
+            for (int i = 1; i < n; i *= 2)  //iteration sorts all runs of length i
+            {
+                for (int j = 0; j < n; j += 2*i) //each pass merges two runs of length i
+                {
+                    Merge(src, dest, comparer, j, i);
+                }
+                Swap(ref src, ref dest);    //reverse roles of vectors
+            }
+            if(sequence != src)
+            {
+                Array.Copy(src, 0, sequence, 0, n); //additional copy to get result to original sequence
+            }
 
-            //conquer
-            MergeSort(S1, comparer);
-            MergeSort(S2, comparer);
-
-            //merge results
-            Merge(S1, S2, sequence, comparer);
         }
 
-        private static void Merge<K>(K[] S1, K[] S2, K[] sequence, IComparer<K> comparer) where K : IComparable<K>
+        private void Swap<K>(ref K[] A, ref K[] B) where K : IComparable<K>
         {
-            int i = 0; int j = 0;
-            while (i + j < sequence.Length)
+            K[] Temp;
+            Temp = B;
+            A = B;
+            B = Temp;
+        }
+
+        private void Merge<K>(K[] In, K[] Out, IComparer<K> comparer, int start, int inc) where K : IComparable<K>
+        {
+            //Merges in[start...start+inc-1] and in[start+inc...start+2*inc-1] into out
+            int end1 = Math.Min(start + inc, In.Length);        //boundary for run 1
+            int end2 = Math.Min(start + 2 * inc, In.Length);    //boundary for run 2
+            int x = start;                                      //index into run 1
+            int y = start + inc;                                //index into run 2
+            int z = start;                                      //index into output
+
+            while (x < end1 && y < end2)
             {
-                if (j == S2.Length || (i < S1.Length && comparer.Compare(S1[i], S2[j]) < 0))
-                {
-                    sequence[i + j] = S1[i++]; //copy ith element of S1 and increment i
+                if (comparer.Compare(In[x], In[y]) < 0)
+                    {
+                    Out[z++] = In[x++];     //take next from run 1
                 }
                 else
                 {
-                    sequence[i + j] = S2[j++]; //copy jth element of S2 and increment j
+                    Out[z++] = In[y++];     //take next from run 2
                 }
             }
+            if (x < end1)
+            {
+
+                Array.Copy(In, x, Out, z, end1 - x);                    //copy rest of run 1
+            }
+            else if (y < end2) Array.Copy(In, y, Out, z, end2 - y);     //copy rest of run 2
         }
     }
 }
