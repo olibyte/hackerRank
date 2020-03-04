@@ -25,10 +25,15 @@ namespace Vector
                     }
                 }
                 // Swap the found minimum element with the first
-                K temp = sequence[min_idx];
-                sequence[min_idx] = sequence[i];
-                sequence[i] = temp;
+                Swap(ref sequence[min_idx], ref sequence[i]);
             }
+        }
+        public void Swap<K>(ref K a, ref K b)
+        {
+            K temp;
+            temp = a;
+            a = b;
+            b = temp;
         }
     }
 }

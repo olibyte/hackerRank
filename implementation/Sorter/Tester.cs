@@ -61,12 +61,14 @@ namespace Vector
 
             Vector<int> vector = new Vector<int>(problem_size);
 
-            // ------------------ Default Sort ----------------------------------
+
+            //          ------------------ RandomizedQuickSort ----------------------------------
+
             try
             {
-                Console.WriteLine("\nTest A: Sort integer numbers applying Default Sort with AscendingIntComparer: ");
+                Console.WriteLine("\nTest A: Sort integer numbers applying RandomizedQuickSort with AscendingIntComparer: ");
                 vector = new Vector<int>(problem_size);
-                vector.Sorter = null;
+                vector.Sorter = new RandomizedQuickSort();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new AscendingIntComparer());
@@ -84,9 +86,9 @@ namespace Vector
 
             try
             {
-                Console.WriteLine("\nTest B: Sort integer numbers applying Default Sort with DescendingIntComparer: ");
+                Console.WriteLine("\nTest B: Sort integer numbers applying RandomizedQuickSort with DescendingIntComparer: ");
                 vector = new Vector<int>(problem_size);
-                vector.Sorter = null;
+                vector.Sorter = new RandomizedQuickSort();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new DescendingIntComparer());
@@ -104,9 +106,9 @@ namespace Vector
 
             try
             {
-                Console.WriteLine("\nTest C: Sort integer numbers applying Default Sort with EvenNumberFirstComparer: ");
+                Console.WriteLine("\nTest C: Sort integer numbers applying RandomizedQuickSort with EvenNumberFirstComparer: ");
                 vector = new Vector<int>(problem_size);
-                vector.Sorter = null;
+                vector.Sorter = new RandomizedQuickSort();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new EvenNumberFirstComparer());
@@ -124,13 +126,13 @@ namespace Vector
 
 
 
-            // ------------------ BubbleSort ----------------------------------
+            //------------------ MergeSortTopDown ----------------------------------
 
             try
             {
-                Console.WriteLine("\nTest D: Sort integer numbers applying BubbleSort with AscendingIntComparer: ");
-              vector = new Vector<int>(problem_size);
-              vector.Sorter = new BubbleSort();
+                Console.WriteLine("\nTest D: Sort integer numbers applying MergeSortTopDown with AscendingIntComparer: ");
+                vector = new Vector<int>(problem_size);
+                vector.Sorter = new MergeSortTopDown();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new AscendingIntComparer());
@@ -148,9 +150,9 @@ namespace Vector
 
             try
             {
-                Console.WriteLine("\nTest E: Sort integer numbers applying BubbleSort with DescendingIntComparer: ");
+                Console.WriteLine("\nTest E: Sort integer numbers applying MergeSortTopDown with DescendingIntComparer: ");
                 vector = new Vector<int>(problem_size);
-                vector.Sorter = new BubbleSort();
+                vector.Sorter = new MergeSortTopDown();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new DescendingIntComparer());
@@ -168,9 +170,9 @@ namespace Vector
 
             try
             {
-                Console.WriteLine("\nTest F: Sort integer numbers applying BubbleSort with EvenNumberFirstComparer: ");
+                Console.WriteLine("\nTest F: Sort integer numbers applying MergeSortTopDown with EvenNumberFirstComparer: ");
                 vector = new Vector<int>(problem_size);
-                vector.Sorter = new BubbleSort();
+                vector.Sorter = new MergeSortTopDown();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new EvenNumberFirstComparer());
@@ -185,15 +187,16 @@ namespace Vector
                 Console.WriteLine(exception.ToString());
                 result = result + "-";
             }
-            
 
-            // ------------------ SelectionSort ----------------------------------
+
+
+            //------------------ MergeSortBottomUp ----------------------------------
 
             try
             {
-                Console.WriteLine("\nTest G: Sort integer numbers applying SelectionSort with AscendingIntComparer: ");
+                Console.WriteLine("\nTest G: Sort integer numbers applying MergeSortBottomUp with AscendingIntComparer: ");
                 vector = new Vector<int>(problem_size);
-               vector.Sorter = new SelectionSort();
+                vector.Sorter = new MergeSortBottomUp();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new AscendingIntComparer());
@@ -211,9 +214,9 @@ namespace Vector
 
             try
             {
-                Console.WriteLine("\nTest H: Sort integer numbers applying SelectionSort with DescendingIntComparer: ");
+                Console.WriteLine("\nTest H: Sort integer numbers applying MergeSortBottomUp with DescendingIntComparer: ");
                 vector = new Vector<int>(problem_size);
-                vector.Sorter = new SelectionSort();
+                vector.Sorter = new MergeSortBottomUp();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new DescendingIntComparer());
@@ -231,9 +234,9 @@ namespace Vector
 
             try
             {
-                Console.WriteLine("\nTest I: Sort integer numbers applying SelectionSort with EvenNumberFirstComparer: ");
+                Console.WriteLine("\nTest I: Sort integer numbers applying MergeSortBottomUp with EvenNumberFirstComparer: ");
                 vector = new Vector<int>(problem_size);
-                vector.Sorter = new SelectionSort();
+                vector.Sorter = new MergeSortBottomUp();
                 for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
                 Console.WriteLine("Intital data: " + vector.ToString());
                 vector.Sort(new EvenNumberFirstComparer());
@@ -241,70 +244,6 @@ namespace Vector
                 if (!CheckEvenNumberFirst(vector)) throw new Exception("Sorted vector has an incorrect sequence of integers");
                 Console.WriteLine(" :: SUCCESS");
                 result = result + "I";
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(" :: FAIL");
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
-
-
-
-            // ------------------ InsertionSort ----------------------------------
-
-            try
-            {
-                Console.WriteLine("\nTest J: Sort integer numbers applying InsertionSort with AscendingIntComparer: ");
-                vector = new Vector<int>(problem_size);
-                vector.Sorter = new InsertionSort();
-                for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
-                Console.WriteLine("Intital data: " + vector.ToString());
-                vector.Sort(new AscendingIntComparer());
-                Console.WriteLine("Resulting order: " + vector.ToString());
-                if (!CheckAscending(vector)) throw new Exception("Sorted vector has an incorrect sequence of integers");
-                Console.WriteLine(" :: SUCCESS");
-                result = result + "J";
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(" :: FAIL");
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
-
-            try
-            {
-                Console.WriteLine("\nTest K: Sort integer numbers applying InsertionSort with DescendingIntComparer: ");
-                vector = new Vector<int>(problem_size);
-                vector.Sorter = new InsertionSort();
-                for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
-                Console.WriteLine("Intital data: " + vector.ToString());
-                vector.Sort(new DescendingIntComparer());
-                Console.WriteLine("Resulting order: " + vector.ToString());
-                if (!CheckDescending(vector)) throw new Exception("Sorted vector has an incorrect sequence of integers");
-                Console.WriteLine(" :: SUCCESS");
-                result = result + "K";
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(" :: FAIL");
-                Console.WriteLine(exception.ToString());
-                result = result + "-";
-            }
-
-            try
-            {
-                Console.WriteLine("\nTest L: Sort integer numbers applying InsertionSort with EvenNumberFirstComparer: ");
-                vector = new Vector<int>(problem_size);
-                vector.Sorter = new InsertionSort();
-                for (int i = 0; i < problem_size; i++) vector.Add(data[i]);
-                Console.WriteLine("Intital data: " + vector.ToString());
-                vector.Sort(new EvenNumberFirstComparer());
-                Console.WriteLine("Resulting order: " + vector.ToString());
-                if (!CheckEvenNumberFirst(vector)) throw new Exception("Sorted vector has an incorrect sequence of integers");
-                Console.WriteLine(" :: SUCCESS");
-                result = result + "L";
             }
             catch (Exception exception)
             {

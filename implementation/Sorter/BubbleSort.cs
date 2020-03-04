@@ -17,13 +17,18 @@ namespace Vector
                 {
                     if (comparer.Compare(sequence[j], sequence[j + 1]) > 0)
                     {
-                        K temp = sequence[j];
-                        sequence[j] = sequence[j + 1];
-                        sequence[j + 1] = temp;
+                        Swap(ref sequence[j], ref sequence[j + 1]);
                     }
                 }
             }
         }
 
+        public void Swap<K>(ref K a, ref K b)
+        {
+            K temp;
+            temp = a;
+            a = b;
+            b = temp;
+        }
     }
 }

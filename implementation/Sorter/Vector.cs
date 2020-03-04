@@ -6,7 +6,6 @@ namespace Vector
 {
     public class Vector<T> where T : IComparable<T>
     {
-
         // This constant determines the default number of elements in a newly created vector.
         // It is also used to extended the capacity of the existing vector
         private const int DEFAULT_CAPACITY = 10;
@@ -67,6 +66,16 @@ namespace Vector
             if (Count == Capacity) ExtendData(DEFAULT_CAPACITY);
             data[Count++] = element;
         }
+        public bool Remove(T element) //removes
+        {
+            //if data contains element
+            if (Contains(element))
+            {
+                RemoveAt(IndexOf(element));
+                return true;
+            }
+            return false;
+        }
 
         // This method searches for the specified object and returns the zero‐based index of the first occurrence within the entire data structure.
         // This method performs a linear search; therefore, this method is an O(n) runtime complexity operation.
@@ -79,6 +88,146 @@ namespace Vector
                 if (data[i].Equals(element)) return i;
             }
             return -1;
+        }
+        public void Insert(int index, T element) //insert a new element at the specified index
+        {
+            if (index > Count || index < 0) throw new IndexOutOfRangeException();
+            {
+                ExtendData(DEFAULT_CAPACITY);
+            }
+            if (Count == Capacity)
+                ExtendData(DEFAULT_CAPACITY);
+            if (index == Count)
+            {
+                data[Count] = element;
+
+            }
+            for (int i = Count; i > index; i--)
+            {
+                data[i] = data[i - 1];
+            }
+            data[index] = element;
+            Count++;
+        }
+
+        public void Clear()
+        {
+            while (Count != 0)
+            {
+                Count--;
+            }
+        }
+
+        public bool Contains(T element)
+        {
+            for (var i = 0; i < Count; i++)
+            {
+                if (data[i].Equals(element))
+                    return true;
+            }
+            return false;
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index > Count)
+            {
+                throw new IndexOutOfRangeException("Index out of bounds");
+            }
+            for (int j = index; j < Count - 1; j++)
+            {
+                data[j] = data[j + 1];
+            }
+            data[Count - 1] = default(T);
+            Count--;
+        }
+
+        public override string ToString()
+        {
+            string stringData = "";
+            for (int i = 0; i < Count; i++)
+            {
+                stringData += string.Format($", {data[i]}");
+            }
+            return $"[ {stringData} ]";
+        }
+        public T Find(Func<T, bool> searchCriteria)
+        {
+            if (searchCriteria == null) throw new ArgumentNullException("Search criteria is null.");
+            for (int i = 0; i < Count; i++)
+            {
+                if (searchCriteria(data[i])) return data[i];
+            }
+            return default(T);
+        }
+        public T Max()
+        {
+            Comparer<T> comparer = Comparer<T>.Default; //default comparer from IComparer
+
+            T maxValue = data[0];
+            if (maxValue == null)
+            {
+                return default(T);
+            }
+            for (int i = 0; i < Count; i++)
+            {
+
+                if (comparer.Compare(data[i], maxValue) == 1)
+                {
+                    maxValue = data[i];
+                }
+            }
+            return maxValue;
+        }
+
+        public T Min()
+        {
+            Comparer<T> comparer = Comparer<T>.Default; //default comparer from IComparer
+
+            T minValue = data[0];
+            if (minValue == null)
+            {
+                return default(T);
+            }
+            for (int i = 0; i < Count; i++)
+            {
+
+                if ((comparer.Compare(data[i], minValue) < 1))
+                {
+                    minValue = data[i];
+                }
+            }
+            return minValue;
+        }
+
+        public Vector<T> FindAll(Func<T, bool> searchCriteria)
+        {
+
+            if (searchCriteria == null) throw new ArgumentNullException("Search criteria is null.");
+            Vector<T> results = new Vector<T>();
+            for (int i = 0; i < Count; i++)
+            {
+                if (searchCriteria(data[i]))
+                    results.Add(data[i]);
+            }
+            return results;
+        }
+
+        public int RemoveAll(Func<T, bool> filterCriteria)
+        {
+            if (filterCriteria == null) throw new ArgumentNullException();
+
+            int elementsRemoved = 0;
+            for (int i = Count - 1; i >= 0; i--)
+            {
+                if (filterCriteria(data[i]))
+                {
+                    elementsRemoved++;
+                    RemoveAt(i);
+                }
+            }
+            return elementsRemoved;
+
         }
 
         public ISorter Sorter { set; get; } = new DefaultSorter();
@@ -106,7 +255,82 @@ namespace Vector
             if (comparer == null) Sorter.Sort(data, null);
             else Sorter.Sort(data, comparer);
         }
-        
+
+        public int BinarySearch_Iterative(T element)
+        {
+            int bottom = 0;
+            int top = Count - 1;
+            int middle = (bottom + top) / 2;
+            while (top >= bottom)
+            {
+                if (data[middle].CompareTo(element) == 0)
+                {
+                    return IndexOf(element);
+                }
+                else if (data[middle].CompareTo(element) > 0)
+                {
+                    top = middle - 1;
+                }
+                else
+                {
+                    bottom = middle + 1;
+                }
+                middle = (bottom + top) / 2;
+            }
+            return -1;
+        }
+        public int BinarySearch_Iterative(T element, IComparer<T> comparer)
+        {
+            int bottom = 0;
+            int top = Count - 1;
+            int middle = (bottom + top) / 2;
+            while (top >= bottom)
+            {
+                if (comparer.Compare(data[middle], element) == 0)
+                {
+                    return IndexOf(element);
+                }
+                else if (comparer.Compare(data[middle], element) > 0)
+                {
+                    top = middle - 1;
+                }
+                else
+                {
+                    bottom = middle + 1;
+                }
+                middle = (bottom + top) / 2;
+            }
+            return -1;
+
+        }
+        public int BinarySearch(T element, int left, int right, IComparer<T> comparer)
+        {
+            if (comparer == null)
+                comparer = Comparer<T>.Default;
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+                int result = comparer.Compare(element, data[mid]);
+                if (result == 0)
+                {
+                    return mid;
+                }
+                else if (result > 0)
+                {
+                    return BinarySearch(element, mid + 1, right, comparer);
+                }
+                return BinarySearch(element, left, mid - 1, comparer);
+            }
+            return -1;
+        }
+        public int BinarySearch(T element)
+        {
+            return BinarySearch(element, 0, Count, null);
+        }
+        public int BinarySearch(T element, IComparer<T> comparer)
+        {
+            return BinarySearch(element, 0, Count, comparer);
+        }
 
     }
 }
