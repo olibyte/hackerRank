@@ -331,6 +331,19 @@ namespace Vector
         {
             return BinarySearch(element, 0, Count, comparer);
         }
+                // TODO: Your task is to implement all the remaining methods.
+        // Read the instruction carefully, study the code examples from above as they should help you to write the rest of the code.
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            // You should replace this plug by your code.
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
     }
 }
