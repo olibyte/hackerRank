@@ -129,7 +129,7 @@ namespace Vector
                 middle = (bottom + top) / 2;
             }
             return -1;
-        }
+        }//done
         public int BinarySearch_Iterative(T element, IComparer<T> comparer)
         {
             int bottom = 0;
