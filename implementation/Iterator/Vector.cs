@@ -81,11 +81,11 @@ namespace Vector
             }
             return -1;
         }
-        
+
         public class VectorEnumerator : IEnumerator<T>
         {
             private Vector<T> _data;
-      
+
             private int _currentIndex;
             private T _current;
 
@@ -97,7 +97,7 @@ namespace Vector
             }
             public T Current
             {
-                get 
+                get
                 {
                     try
                     {
@@ -114,7 +114,8 @@ namespace Vector
             { }
             object IEnumerator.Current
             {
-                 get {
+                get
+                {
                     try
                     {
                         return _current;
@@ -128,7 +129,7 @@ namespace Vector
             }
             public bool MoveNext()
             {
-                if(++_currentIndex >= _data.Count) //if the index is beyond the vector
+                if (++_currentIndex >= _data.Count) //if the index is beyond the vector
                 {
                     return false;
                 }
@@ -153,11 +154,4 @@ namespace Vector
             return GetEnumerator();
         }
     }
-
-    // TODO: Your task is to implement all the remaining methods.
-    // Read the instruction carefully, study the code examples from above as they should help you to write the rest of the code.
-
-    
-
-    
 }
