@@ -12,48 +12,51 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 
-class Solution {
+class Solution
+{
 
     // Complete the triplets function below.
-    static long triplets(int[] a, int[] b, int[] c) {
- Array.Sort(a);
-            Array.Sort(b);
-            Array.Sort(c);
+    static long triplets(int[] a, int[] b, int[] c)
+    {
+        Array.Sort(a);
+        Array.Sort(b);
+        Array.Sort(c);
 
-            a = a.Distinct().ToArray();
-            b = b.Distinct().ToArray();
-            c = c.Distinct().ToArray();
+        a = a.Distinct().ToArray();
+        b = b.Distinct().ToArray();
+        c = c.Distinct().ToArray();
 
-            int lastIndexA = a.Length - 1, lastIndexC = c.Length - 1;
-            long total = 0;
+        int lastIndexA = a.Length - 1, lastIndexC = c.Length - 1;
+        long total = 0;
 
-            for (int indexB = b.Length - 1; indexB >= 0; indexB--)
+        for (int indexB = b.Length - 1; indexB >= 0; indexB--)
+        {
+            for (int indexA = lastIndexA; indexA >= 0; indexA--)
             {
-                for (int indexA = lastIndexA; indexA >= 0; indexA--)
+                if (a[indexA] <= b[indexB])
                 {
-                    if (a[indexA] <= b[indexB])
-                    {
-                        lastIndexA = indexA;
-                        break;
-                    }
-                }
-
-                for (int indexC = lastIndexC; indexC >= 0; indexC--)
-                {
-                    if (c[indexC] <= b[indexB])
-                    {
-                        lastIndexC = indexC;
-                        total += (long)(lastIndexA + 1) * (lastIndexC + 1);
-                        break;
-                    }
+                    lastIndexA = indexA;
+                    break;
                 }
             }
 
-            return total;
+            for (int indexC = lastIndexC; indexC >= 0; indexC--)
+            {
+                if (c[indexC] <= b[indexB])
+                {
+                    lastIndexC = indexC;
+                    total += (long)(lastIndexA + 1) * (lastIndexC + 1);
+                    break;
+                }
+            }
+        }
+
+        return total;
 
     }
 
-    static void Main(string[] args) {
+    static void Main(string[] args)
+    {
         TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
         string[] lenaLenbLenc = Console.ReadLine().Split(' ');
