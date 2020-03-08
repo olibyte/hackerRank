@@ -30,7 +30,6 @@ class Solution {
         int result = sockMerchant(n, ar);
 
         textWriter.WriteLine(result);
-
         textWriter.Flush();
         textWriter.Close();
     }
