@@ -36,6 +36,7 @@ class Solution {
         return count;
     }
     // Complete the largestRectangle function below.
+    //NAIVE IMPLEMENTATION O(N**2)
     static long largestRectangle(int[] h) {
         long max = long.MinValue;
         long current;
