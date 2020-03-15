@@ -20,7 +20,7 @@ public class Queue
     {
         return head.data; //want data at front
     }
-    public void Add(int data) //add to the back of the queue i.e. Enqueue
+    public void Add(int data) //add to the back of the queue i.e. Enqueue. First in.
     {
         Node node = new Node(data);
         if (tail != null)
@@ -33,7 +33,7 @@ public class Queue
             head = node;
         }
     }
-    public int Remove() //i.e. Dequeue
+    public int Remove() //i.e. Dequeue. First out.
     {
         int data = head.data;
         head = head.next; //essentially removing it from the queue

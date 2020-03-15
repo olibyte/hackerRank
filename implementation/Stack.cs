@@ -19,13 +19,13 @@ public class Stack
     {
         return top.data; //want data at top
     }
-    public void Push(int data)
+    public void Push(int data) //last in.
     {
         Node node = new Node(data);
         node.next = top; //points to 'old top'
         top = node; //top is now the new node
     }
-    public int Pop()
+    public int Pop() //first out.
     {
         int data = top.data; //get data on top
         top = top.next; //top should be pointed to next element
