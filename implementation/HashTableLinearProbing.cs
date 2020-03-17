@@ -1,5 +1,4 @@
 //HashTable
-
 //good for fast key value lookups
 //hash function takes in a string, converts it to a hashcode, maps it to an index in the array
 //chaining -> if there's a collision, store it in a linked list
