@@ -5,7 +5,6 @@ class node:
         self.left = None
         self.right = None
 """
-
 def checkBST(root):
     INT_MIN = 0
     INT_MAX = 10000
