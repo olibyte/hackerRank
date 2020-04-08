@@ -15,8 +15,7 @@ namespace ConsoleApp3
     smaller (smaller than pivot) to left of 
     pivot and all greater elements to right 
     of pivot */
-        static int partition(int[] arr, int low,
-                                       int high)
+        static int partition(int[] arr, int low, int high)
         {
             int pivot = arr[high];
 
@@ -24,12 +23,10 @@ namespace ConsoleApp3
             int i = (low - 1);
             for (int j = low; j < high; j++)
             {
-                // If current element is smaller  
-                // than the pivot 
+                // If current element is smaller than the pivot 
                 if (arr[j] < pivot)
                 {
                     i++;
-
                     // swap arr[i] and arr[j] 
                     int temp = arr[i];
                     arr[i] = arr[j];
@@ -54,13 +51,10 @@ namespace ConsoleApp3
         {
             if (low < high)
             {
-
-                /* pi is partitioning index, arr[pi] is  
-                now at right place */
+                /* pi is partitioning index, arr[pi] is now at right place */
                 int pi = partition(arr, low, high);
 
-                // Recursively sort elements before 
-                // partition and after partition 
+                // Recursively sort elements before partition and after partition 
                 quickSort(arr, low, pi - 1);
                 quickSort(arr, pi + 1, high);
             }
@@ -75,13 +69,13 @@ namespace ConsoleApp3
 
         static void Main(string[] args)
         {
-            
+
             int[] my_array = { 10, 7, 8, 9, 1, 5 };
             int n = my_array.Length;
 
             printArray(my_array, n);
 
-            quickSort(my_array, 0, n-1);
+            quickSort(my_array, 0, n - 1);
 
             printArray(my_array, n);
         }
