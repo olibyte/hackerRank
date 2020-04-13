@@ -19,6 +19,14 @@ def chocolateFeast(n, c, m):
         result += bars
     return result
 
+    #bit more elegant doing it in the one step
+    # chocs = n / c
+    # wraps = chocs
+    # while wraps >= m:
+    #     chocs += wraps/m
+    #     wraps = wraps/m + wraps%m
+    # return chocs
+
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
