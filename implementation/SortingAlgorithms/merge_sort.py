@@ -32,3 +32,5 @@ mergeSort(a)
 # Print output 
 print("Sorted array is") 
 print(*a)
+
+#Best: 
