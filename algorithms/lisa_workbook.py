@@ -6,7 +6,6 @@ import random
 import re
 import sys
 
-# Complete the workbook function below.
 def workbook(n, k, arr):
     page_no = 1
     counter = 0
@@ -14,7 +13,7 @@ def workbook(n, k, arr):
         i = 0
         number_of_pages_in_chapter = num_of_problem // k #each page can hold up to k problems. the integer division here is no. of full pages.
         if num_of_problem % k != 0:
-            number_of_pages_in_chapter += 1 #use modulo for pages that aren't quite full.
+            number_of_pages_in_chapter += 1 #use modulo for pages that aren't quite full
         while i < number_of_pages_in_chapter:
             p1 = i * k + 1
             p2 = (i+1) * k
