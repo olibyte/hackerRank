@@ -6,7 +6,6 @@ import random
 import re
 import sys
 
-# Complete the flatlandSpaceStations function below.
 def flatlandSpaceStations(n, c):
     c.sort()
     r = list()
