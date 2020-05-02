@@ -1,6 +1,5 @@
 #Best case: O(n**2)
 
-
 def insertion_sort(list):
     n = len(list)
     for i in range(1, n):
