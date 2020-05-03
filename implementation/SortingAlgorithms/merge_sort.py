@@ -33,4 +33,27 @@ mergeSort(a)
 print("Sorted array is") 
 print(*a)
 
-#Best: 
+#deakin lecturer niroshinie fernando/SW Loke implementation
+def rec_merge_sort(m):
+	if len(m) <= 1:
+		return m
+	
+	#partition
+	middle = len(m) // 2
+	left = m[:middle]
+	right = m[middle:]
+
+	left = rec_merge_sort(left)
+	right = rec_merge_sort(right)
+
+	return rec_merge(left, right)
+def rec_merge(left, right):
+	if left == []:
+		return right
+	if right == []:
+		return left
+	#if left element is smaller than right element
+	if (left[0] < right[0]):
+		return [left[0]] + rec_merge(left[1:], right) #add to sorted array
+	else:
+		return [right[0]] + rec_merge(left, right[1:])
