@@ -13,9 +13,13 @@ def calculate_mean(arr):
     return mean/n
 
 def calculate_median(arr):
+    n = len(arr)
     median = 0
-    mid = n//2
-    median = (arr[mid]+arr[mid-1]) / 2
+    mid = n // 2
+    if n % 2 == 0:
+        median = (arr[mid] + arr[mid-1]) / 2
+    else:
+        median = arr[mid]
     return median
 
 def calculate_mode(arr):
