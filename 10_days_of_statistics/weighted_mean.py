@@ -6,10 +6,10 @@ W = list(map(int,input().split(' ')))
 def calculate_weighted_mean(n,x,w):
     numerator, denominator, weighted_mean = 0,0,0
 
-    for i in range(0,n):
+    for i in range(n):
         numerator += X[i] * W[i]
         denominator += W[i]
-    weighted_mean += numerator/denominator
+    weighted_mean = round(numerator/denominator,1)
     
     return weighted_mean
 
