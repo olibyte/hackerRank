@@ -1,23 +1,40 @@
-# Enter your code here. Read input from STDIN. Print output to STDOUT
-n = int(input())
-nums = sorted([int(num) for num in input().split()])
+import os
+import math
 
-def median(nums):
-    if (len(nums) % 2) == 0:
-        return int(sum(nums[len(nums) // 2-1:len(nums) // 2+1]) / 2)
-    else:
-        return nums[len(nums) // 2]
 
-def quartiles(n, nums):
-    q1 = median(nums[:len(nums) // 2])
-    q2 = median(nums)
-    if (n % 2)  == 0:
-        q3 = median(nums[len(nums) // 2:])
-    else:
-        q3 = median(nums[len(nums) // 2+1:])
-    return (q1, q2, q3)
-def iqr(q1,q3):
+def median(arr):
+    n = len(arr) - 1
+    if n <= 0:
+        return 0
+    return (arr[math.floor(n / 2)] + arr[math.ceil(n / 2)]) / 2
+
+
+def quartiles(arr):
+    n = len(arr)
+    q1 = median(arr[:n // 2])
+    q2 = median(arr)
+    q3 = median(arr[math.ceil(n / 2):])
+    return q1, q2, q3
+
+
+def interquartile_range(arr):
+    q1, _, q3 = quartiles(arr)
     return q3 - q1
-q1, q2, q3 = quartiles(n, nums)
-# print('{0}{3}{1}{3}{2}'.format(q1, q2, q3, '\n'))
-print(iqr(q1,q3))
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+    arr = list(map(int, input().rstrip().split()))
+    freq = list(map(int, input().rstrip().split()))
+
+    s = []
+    for i in range(0, n):
+        s += freq[i] * [arr[i]]
+    s.sort()
+
+    iq = interquartile_range(s)
+
+    fptr.write('{:.1f}\n'.format(iq))
+    fptr.close()
