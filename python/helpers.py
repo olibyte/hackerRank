@@ -53,8 +53,18 @@ list_b = random.sample(range(0,20),10)
 
 # list_a = [1,2,3]
 # list_b = [1,2,3,4,5]
-print(list_a,list_b)
-print(union(list_a,list_b))
-print(diff(list_a,list_b))
-print(intersect(list_a,list_b))
-print(countEven(list_a))
+# print(list_a,list_b)
+# print(union(list_a,list_b))
+# print(diff(list_a,list_b))
+# print(intersect(list_a,list_b))
+# print(countEven(list_a))
+
+# P(A) = 13/52 = 1/4
+# P(B) = 12/51 = 12/51
+# P(A) & P(B) = 12/204
+
+# print(204//12,204%12)
+# P(B|A) = P(A&B) / P(A)
+# P(A&B) = P(A) * P(B)
+# P(A) = 3/7
+# P(B) = 4/6
