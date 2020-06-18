@@ -19,5 +19,8 @@ p = values[0] / values[1]
 n = 5
 # print(('{} {}').format(values[0],values[1]))
 # print(negative_binomial(1,n,p))
-result = geometric(n,p)
+result = 0 
+for i in range(n+1):
+    if i > 0:
+        result += geometric(i,p)
 print(round(result,3))
