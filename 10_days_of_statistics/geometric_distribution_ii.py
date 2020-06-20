@@ -7,7 +7,6 @@ def factorial(n):
 def binomial(x, n, p):
     f = factorial(n) / (factorial(n - x) * factorial(x))
     return (f * p**x * (1.0 - p)**(n-x))
-
 def negative_binomial(x,n,p):
     f = factorial(n-1) / (factorial(n - 1 - x) * factorial(x - 1))
     return (f * p**x * (1.0 - p)**(n-x))
