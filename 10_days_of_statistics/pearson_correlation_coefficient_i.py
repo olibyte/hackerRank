@@ -28,20 +28,4 @@ for i in range(0,n):
     numerator += ((X[i] - X_mean) * (Y[i] - Y_mean))
 denominator = n * X_std * Y_std
 result = numerator / denominator
-# print(round(result,3))
-
-'''
-rx = 3x + 4y + 8 = 0
-ry = 4x + 3y + 7
-'''
-def rx(a,b):
-    return 3*a + 4*b + 8
-def ry(a,b):
-    return 4*a + 3*b + 7
-
-
-for i in range(1,10):
-    X += rx(i,i)
-    Y += rx(i,i)
-print(X)
-print(Y)
+print(round(result,3))
