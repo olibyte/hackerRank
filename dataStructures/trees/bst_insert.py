@@ -26,20 +26,20 @@ class BinarySearchTree:
 
     def insert(self, val):
         # Enter your code here
-        node = Node(val) #node for val insertion
+        node = Node(val) #create a new node for val insertion
         if self.root == None: #if BST is empty
             self.root = node #insert at root
             return self.root
 
         cur = self.root #start from root
         while cur:
-            if val < cur.info: #if val is less than current node val
+            if val < cur.info: #if val is less than current root node
                 if cur.left: #if there is a left child
                     cur = cur.left # this left child is now root to be considered
                 else:
-                    cur.left = node #insert here
+                    cur.left = node #insert 
                     break
-            elif val > cur.info: #if val is greater than root
+            elif val > cur.info: #if val is greater than current root node
                 if cur.right: #if right child is present
                     cur = cur.right #right child is now root to be considered
                 else:
