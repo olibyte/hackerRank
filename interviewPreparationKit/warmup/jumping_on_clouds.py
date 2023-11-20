@@ -8,14 +8,17 @@ import sys
 
 # Complete the jumpingOnClouds function below.
 def jumpingOnClouds(c):
-    last_cloud = len(c) - 1
+    last_cloud = len(c)
     min_jumps = 0
     position = 0
-    while position < last_cloud:
+    while position < last_cloud - 1:
         if position + 2 < last_cloud and c[position + 2] == 0:
+            # jump 2 clouds if possible
             position += 2
         else:
+            # otherwise jump 1 cloud
             position += 1
+            
         min_jumps += 1
     return min_jumps
 
